@@ -1,12 +1,14 @@
 #include "philo.h"
 
-unsigned long long	runtime_to_ms(struct timeval *time)
+unsigned long long	runtime_to_ms()
 {
-	unsigned long long int	ms;
+	unsigned long long int			ms;
 	static unsigned long long int	start = 0;
+	static struct timeval			time;
 
-	ms = time->tv_sec * 1000;
-	ms += time->tv_usec / 1000;
+	gettimeofday(&time, NULL);
+	ms = time.tv_sec * 1000;
+	ms += time.tv_usec / 1000;
 	if (!start)
 		start = ms;
 	return (ms - start);
@@ -66,12 +68,6 @@ int	main(int ac,char **av)
 	t_philo			*head;
 	struct timeval	time;
 
-	while (i--)
-	{
-		gettimeofday(&time, NULL);
-		printf("%llu\n", runtime_to_ms(&time));
-	}
-	exit(0);
 	number_of_philosophers = atoi(av[1]);
 	head = creat_philos(number_of_philosophers);
 	head->prev = NULL;
