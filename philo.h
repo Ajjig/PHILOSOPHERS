@@ -14,9 +14,10 @@
 
 typedef struct	s_philo
 {
-	int		nth;
-	struct	s_philo *next;
-	struct	s_philo *prev;
+	int				nth;
+	struct	s_philo	*next;
+	struct	s_philo	*prev;
+	pthread_mutex_t	fork;
 }				t_philo;
 
 /* DEFINES */
