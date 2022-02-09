@@ -66,7 +66,6 @@ int	main(int ac,char **av)
 {
 	int				number_of_philosophers;
 	t_philo			*head;
-	struct timeval	time;
 
 	number_of_philosophers = atoi(av[1]);
 	head = creat_philos(number_of_philosophers);
