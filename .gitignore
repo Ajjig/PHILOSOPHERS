@@ -2,6 +2,6 @@ a.out
 .DS_Store
 *.o
 .vscode
-a.out.dSYM
+philo/philo.dSYM
 tester
 philo/philo
