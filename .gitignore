@@ -3,3 +3,5 @@ a.out
 *.o
 .vscode
 a.out.dSYM
+tester
+philo

@@ -14,10 +14,17 @@
 
 typedef struct	s_philo
 {
-	int				nth;
-	struct	s_philo	*next;
-	struct	s_philo	*prev;
-	pthread_mutex_t	fork;
+	int						nth;
+	struct	s_philo			*next;
+	pthread_mutex_t			fork;
+	pthread_t				thread_data;
+	unsigned long long int	current;
+	unsigned long long int	time_to_die;
+	unsigned long long int	time_to_eat;
+	unsigned long long int	time_to_sleep;
+	unsigned long long int	last_eat;
+	unsigned long long int	n_meals;
+	unsigned long long int	number_of_times_each_philosopher_must_eat;
 }				t_philo;
 
 /* DEFINES */
