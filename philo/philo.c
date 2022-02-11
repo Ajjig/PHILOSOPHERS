@@ -1,5 +1,27 @@
 #include "philo.h"
 
+int	ft_atoi(char *str)
+{
+	int	i;
+	int	nb;
+	int	tmp;
+
+	i = 0;
+	nb = 0;
+	tmp = 0;
+	if (str[i] == '+')
+		i++;
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		nb = (str[i] - '0') + (nb * 10);
+		i++;
+		if (nb < tmp)
+			return (0);
+		tmp = nb;
+	}
+	return (nb);
+}
+
 void	new_philo(t_philo *head, int nth, int ac, char **av)
 {
 	t_philo	*new;
@@ -8,12 +30,12 @@ void	new_philo(t_philo *head, int nth, int ac, char **av)
 	while (head->next)
 		head = head->next;
 	new -> nth = nth;
-	new -> time_to_die = atoi(av[2]);
-	new -> time_to_eat = atoi(av[3]);
-	new -> time_to_sleep = atoi(av[4]);
+	new -> time_to_die = ft_atoi(av[2]);
+	new -> time_to_eat = ft_atoi(av[3]);
+	new -> time_to_sleep = ft_atoi(av[4]);
 	new -> number_of_times_each_philosopher_must_eat = -1;
 	if (ac == 6)
-		new -> number_of_times_each_philosopher_must_eat = atoi(av[5]);
+		new -> number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
 	new -> next = NULL;
 	head -> next = new;
 }
@@ -25,15 +47,15 @@ t_philo	*creat_philos(int ac, char **av)
 	t_philo	*last;
 	int		number_of_philos;
 
-	number_of_philos = atoi(av[1]);
+	number_of_philos = ft_atoi(av[1]);
 	head = (t_philo *) malloc(sizeof(t_philo));
 	head->nth = 1;
-	head -> time_to_die = atoi(av[2]);
-	head -> time_to_eat = atoi(av[3]);
-	head -> time_to_sleep = atoi(av[4]);
+	head -> time_to_die = ft_atoi(av[2]);
+	head -> time_to_eat = ft_atoi(av[3]);
+	head -> time_to_sleep = ft_atoi(av[4]);
 	head -> number_of_times_each_philosopher_must_eat = -1;
 	if (ac == 6)
-		head -> number_of_times_each_philosopher_must_eat = atoi(av[5]);
+		head -> number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
 	head->next = NULL;
 	i = 2;
 	while (i <= number_of_philos)
@@ -92,7 +114,7 @@ int	main(int ac,char **av)
 	if (args_checker(ac, av))
 		return (1);
 	head = creat_philos(ac, av);
-	number_of_philosophers = atoi(av[1]);
+	number_of_philosophers = ft_atoi(av[1]);
 	while (i++ < number_of_philosophers)
 	{
 		pthread_mutex_init(&head -> fork, NULL);

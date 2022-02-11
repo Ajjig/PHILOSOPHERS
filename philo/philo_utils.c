@@ -70,7 +70,7 @@ int	args_checker(int ac, char **av)
 	if (ac < 5)
 		return (write(2, "Error:\nArguments needed\n", 24));
 	while (i < ac)
-		if (atoi(av[i++]) <= 0)
+		if (ft_atoi(av[i++]) <= 0)
 			return (write(2, "Error:\nA non-valid argument\n", 28));
 	return (0);
 }
