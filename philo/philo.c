@@ -89,6 +89,8 @@ int	main(int ac,char **av)
 	pthread_t	health;
 
 	i = 0;
+	if (args_checker(ac, av))
+		return (1);
 	head = creat_philos(ac, av);
 	number_of_philosophers = atoi(av[1]);
 	while (i++ < number_of_philosophers)

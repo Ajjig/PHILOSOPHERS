@@ -59,3 +59,18 @@ void	*health_center(void *void_arg)
 		philo = philo -> next;
 	}
 }
+
+int	args_checker(int ac, char **av)
+{
+	int	i;
+
+	i = 1;
+	if (ac > 6)
+		return (write(2, "Error:\nToo many args\n", 21));
+	if (ac < 5)
+		return (write(2, "Error:\nArguments needed\n", 24));
+	while (i < ac)
+		if (atoi(av[i++]) <= 0)
+			return (write(2, "Error:\nA non-valid argument\n", 28));
+	return (0);
+}
