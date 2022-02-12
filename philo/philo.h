@@ -44,5 +44,6 @@ t_philo					*creat_philos(int ac, char **av);
 void					new_philo(t_philo *head, int nth, int ac, char **av);
 int						args_checker(int ac, char **av);
 int						ft_atoi(char *str);
+void					put(char *str, int nth, int is_dead);
 
 #endif
