@@ -80,6 +80,7 @@ void	*philo_routine(void *void_arg)
 		if (philo -> current == THINK || (runtime_to_ms() == 0 && philo -> nth % 2 != 0))
 		{
 			pthread_mutex_lock(&philo -> fork);
+			printf("%llu %d has taken a fork\n", runtime_to_ms(), philo -> nth);
 			pthread_mutex_lock(&philo -> next -> fork);
 			philo -> current = EAT;
 			printf("%llu %d has taken a fork\n", runtime_to_ms(), philo -> nth);
@@ -91,10 +92,9 @@ void	*philo_routine(void *void_arg)
 			pthread_mutex_unlock(&philo -> fork);
 			pthread_mutex_unlock(&philo -> next -> fork);
 		}
-		else if(philo -> current != SLEEP)
+		else
 		{
 			printf("%llu %d is sleeping\n", runtime_to_ms(), philo -> nth);
-			philo -> current = SLEEP;
 			usleep(philo -> time_to_sleep * 1000);
 			printf("%llu %d is thinking\n", runtime_to_ms(), philo -> nth);
 			philo -> current = THINK;
