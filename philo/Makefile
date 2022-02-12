@@ -1,7 +1,8 @@
 NAME = philo
 
 SRCS =	philo.c \
-		philo_utils.c
+		philo_utils.c \
+		put.c
 
 INC = philo.h
 
