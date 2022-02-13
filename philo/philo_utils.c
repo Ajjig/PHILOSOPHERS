@@ -53,7 +53,7 @@ void	*health_center(void *void_arg)
 			return (NULL);
 		if (runtime_to_ms() > philo -> last_eat + philo -> time_to_die)
 		{
-			put("is died\n", philo -> nth, 1);
+			put(philo -> nth, DEAD);
 			return (NULL);
 		}
 		philo = philo -> next;

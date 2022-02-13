@@ -32,6 +32,8 @@ typedef struct	s_philo
 # define THINK 1
 # define EAT 2
 # define SLEEP 3
+# define FORK 4
+# define DEAD 0
 
 /* PROTOTYPES */
 
@@ -44,6 +46,6 @@ t_philo					*creat_philos(int ac, char **av);
 void					new_philo(t_philo *head, int nth, int ac, char **av);
 int						args_checker(int ac, char **av);
 int						ft_atoi(char *str);
-void					put(char *str, int nth, int is_dead);
+void					put(int nth, int job);
 
 #endif

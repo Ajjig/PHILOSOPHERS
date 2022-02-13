@@ -1,6 +1,6 @@
 #include "philo.h"
 
-void	put(char *str, int nth, int is_dead)
+void	put(int nth, int job)
 {
 	static pthread_mutex_t p;
 	static pthread_mutex_t *pen = NULL;
@@ -11,7 +11,18 @@ void	put(char *str, int nth, int is_dead)
 		pthread_mutex_init(pen, NULL);
 	}
 	pthread_mutex_lock(pen);
-	printf("%llu %d %s", runtime_to_ms(), nth, str);
-	if (is_dead == 0)
-		pthread_mutex_unlock(pen);
+	if (job == FORK)
+		printf("%llu %d is taken a fork\n", runtime_to_ms(), nth);
+	else if (job == EAT)
+		printf("%llu %d is eating\n", runtime_to_ms(), nth);
+	else if (job == SLEEP)
+		printf("%llu %d is sleeping\n", runtime_to_ms(), nth);
+	else if (job == THINK)
+		printf("%llu %d is thinking\n", runtime_to_ms(), nth);
+	else
+	{
+		printf("\033[91m%llu %d is dead\n", runtime_to_ms(), nth);
+		return;
+	}
+	pthread_mutex_unlock(pen);
 }

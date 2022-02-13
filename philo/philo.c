@@ -80,11 +80,11 @@ void	*philo_routine(void *void_arg)
 		if (philo -> current == THINK || (runtime_to_ms() == 0 && philo -> nth % 2 != 0))
 		{
 			pthread_mutex_lock(&philo -> fork);
-			put("has taken a fork\n", philo -> nth, 0);
+			put(philo -> nth, FORK);
 			pthread_mutex_lock(&philo -> next -> fork);
 			philo -> current = EAT;
-			put("has taken a fork\n", philo -> nth, 0);
-			put("is eating\n", philo -> nth, 0);
+			put(philo -> nth, FORK);
+			put(philo -> nth, EAT);
 			usleep(philo->time_to_eat * 1000);
 			philo -> last_eat = runtime_to_ms();
 			if (philo -> number_of_times_each_philosopher_must_eat > 0)
@@ -94,9 +94,9 @@ void	*philo_routine(void *void_arg)
 		}
 		else
 		{
-			put("is sleeping\n", philo -> nth, 0);
+			put(philo -> nth, SLEEP);
 			usleep(philo -> time_to_sleep * 1000);
-			put("is thinking\n", philo -> nth, 0);
+			put(philo -> nth, THINK);
 			philo -> current = THINK;
 		}
 	}
