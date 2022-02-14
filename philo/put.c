@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:17:02 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/14 23:17:03 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/14 23:39:30 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	put(int nth, int job)
 		printf("%llu %d is thinking\n", runtime_to_ms(), nth);
 	else
 	{
-		printf("\033[91m%llu %d dead\n", runtime_to_ms(), nth);
+		printf("%llu %d died\n", runtime_to_ms(), nth);
 		return ;
 	}
 	pthread_mutex_unlock(pen);
