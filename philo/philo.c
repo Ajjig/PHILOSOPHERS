@@ -74,21 +74,20 @@ void	*philo_routine(void *void_arg)
 	philo = (t_philo *) void_arg;
 	while (1)
 	{
-		if (philo -> current == THINK || (runtime_to_ms() == 0 && philo -> nth % 2 != 0))
-		{
-			pthread_mutex_lock(&philo -> fork);
-			put(philo -> nth, FORK);
-			pthread_mutex_lock(&philo -> next -> fork);
-			philo -> current = EAT;
-			put(philo -> nth, FORK);
-			put(philo -> nth, EAT);
-			philo -> last_eat = runtime_to_ms();
-			usleep(philo->time_to_eat * 1000);
-			if (philo -> number_of_times_each_philosopher_must_eat > 0)
-				philo -> number_of_times_each_philosopher_must_eat--;
-			pthread_mutex_unlock(&philo -> fork);
-			pthread_mutex_unlock(&philo -> next -> fork);
-		}
+		if (runtime_to_ms() == 0 && philo -> nth % 2 == 0)
+			usleep(philo -> time_to_eat * 1000);
+		pthread_mutex_lock(&philo -> fork);
+		put(philo -> nth, FORK);
+		pthread_mutex_lock(&philo -> next -> fork);
+		philo -> current = EAT;
+		put(philo -> nth, FORK);
+		put(philo -> nth, EAT);
+		philo -> last_eat = runtime_to_ms();
+		usleep(philo->time_to_eat * 1000);
+		if (philo -> number_of_times_each_philosopher_must_eat > 0)
+			philo -> number_of_times_each_philosopher_must_eat--;
+		pthread_mutex_unlock(&philo -> fork);
+		pthread_mutex_unlock(&philo -> next -> fork);
 		put(philo -> nth, SLEEP);
 		usleep(philo -> time_to_sleep * 1000);
 		put(philo -> nth, THINK);

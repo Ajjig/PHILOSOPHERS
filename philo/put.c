@@ -21,7 +21,7 @@ void	put(int nth, int job)
 		printf("%llu %d is thinking\n", runtime_to_ms(), nth);
 	else
 	{
-		printf("\033[91m%llu %d is dead\n", runtime_to_ms(), nth);
+		printf("\033[91m%llu %d dead\n", runtime_to_ms(), nth);
 		return;
 	}
 	pthread_mutex_unlock(pen);
