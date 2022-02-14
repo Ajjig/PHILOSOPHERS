@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/14 23:12:10 by majjig            #+#    #+#             */
+/*   Updated: 2022/02/14 23:12:11 by majjig           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PHILO_H
 # define PHILO_H
 
@@ -12,10 +24,10 @@
 
 /* STRUCTS */
 
-typedef struct	s_philo
+typedef struct s_philo
 {
 	int						nth;
-	struct	s_philo			*next;
+	struct s_philo			*next;
 	pthread_mutex_t			fork;
 	pthread_t				thread_data;
 	unsigned long long int	current;
