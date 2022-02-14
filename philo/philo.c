@@ -19,6 +19,8 @@ int	ft_atoi(char *str)
 			return (0);
 		tmp = nb;
 	}
+	if (str[i] != 0)
+		return (0);
 	return (nb);
 }
 
