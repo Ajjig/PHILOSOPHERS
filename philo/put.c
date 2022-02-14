@@ -2,8 +2,8 @@
 
 void	put(int nth, int job)
 {
-	static pthread_mutex_t p;
-	static pthread_mutex_t *pen = NULL;
+	static pthread_mutex_t	p;
+	static pthread_mutex_t	*pen = NULL;
 
 	if (pen == NULL)
 	{
@@ -22,7 +22,7 @@ void	put(int nth, int job)
 	else
 	{
 		printf("\033[91m%llu %d dead\n", runtime_to_ms(), nth);
-		return;
+		return ;
 	}
 	pthread_mutex_unlock(pen);
 }
