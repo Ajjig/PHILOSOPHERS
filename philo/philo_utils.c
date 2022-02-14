@@ -66,11 +66,11 @@ int	args_checker(int ac, char **av)
 
 	i = 1;
 	if (ac > 6)
-		return (write(2, "Error:\nToo many args\n", 21));
+		return (write(STDERR_FILENO, "Error:\nToo many args\n", 21));
 	if (ac < 5)
-		return (write(2, "Error:\nArguments needed\n", 24));
+		return (write(STDERR_FILENO, "Error:\nArguments needed\n", 24));
 	while (i < ac)
 		if (ft_atoi(av[i++]) <= 0)
-			return (write(2, "Error:\nA non-valid argument\n", 28));
+			return (write(STDERR_FILENO, "Error:\nA non-valid argument\n", 28));
 	return (0);
 }
