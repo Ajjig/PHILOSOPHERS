@@ -59,10 +59,7 @@ t_philo	*creat_philos(int ac, char **av)
 	head->next = NULL;
 	i = 2;
 	while (i <= number_of_philos)
-	{
-		new_philo(head, i, ac, av);
-		i++;
-	}
+		new_philo(head, i++, ac, av);
 	last = head;
 	while (last->next)
 		last = last->next;
@@ -92,13 +89,10 @@ void	*philo_routine(void *void_arg)
 			pthread_mutex_unlock(&philo -> fork);
 			pthread_mutex_unlock(&philo -> next -> fork);
 		}
-		else
-		{
-			put(philo -> nth, SLEEP);
-			usleep(philo -> time_to_sleep * 1000);
-			put(philo -> nth, THINK);
-			philo -> current = THINK;
-		}
+		put(philo -> nth, SLEEP);
+		usleep(philo -> time_to_sleep * 1000);
+		put(philo -> nth, THINK);
+		philo -> current = THINK;
 	}
 	return (NULL);
 }
