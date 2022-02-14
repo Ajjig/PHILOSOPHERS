@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/14 23:15:08 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/14 23:35:05 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ void	*philo_routine(void *void_arg)
 		usleep(philo->time_to_eat * 1000);
 		if (philo -> number_of_times_each_philosopher_must_eat > 0)
 			philo -> number_of_times_each_philosopher_must_eat--;
+		put(philo -> nth, SLEEP);
 		pthread_mutex_unlock(&philo -> fork);
 		pthread_mutex_unlock(&philo -> next -> fork);
-		put(philo -> nth, SLEEP);
 		usleep(philo -> time_to_sleep * 1000);
 		put(philo -> nth, THINK);
 		philo -> current = THINK;
