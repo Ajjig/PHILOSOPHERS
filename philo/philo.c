@@ -81,8 +81,8 @@ void	*philo_routine(void *void_arg)
 		pthread_mutex_lock(&philo -> next -> fork);
 		philo -> current = EAT;
 		put(philo -> nth, FORK);
-		put(philo -> nth, EAT);
 		philo -> last_eat = runtime_to_ms();
+		put(philo -> nth, EAT);
 		usleep(philo->time_to_eat * 1000);
 		if (philo -> number_of_times_each_philosopher_must_eat > 0)
 			philo -> number_of_times_each_philosopher_must_eat--;
@@ -96,7 +96,7 @@ void	*philo_routine(void *void_arg)
 	return (NULL);
 }
 
-int	main(int ac,char **av)
+int	main(int ac, char **av)
 {
 	t_philo		*head;
 	int			number_of_philosophers;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
+/*   Updated: 2022/02/14 23:08:34 by majjig           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 unsigned long long int	runtime_to_ms(void)
@@ -49,7 +61,8 @@ void	*health_center(void *void_arg)
 	philo = (t_philo *) void_arg;
 	while (1)
 	{
-		if (philo -> number_of_times_each_philosopher_must_eat == 0 && is_all_eat(philo))
+		if (philo -> number_of_times_each_philosopher_must_eat
+			== 0 && is_all_eat(philo))
 			return (NULL);
 		if (philo -> last_eat + philo -> time_to_die + 5 < runtime_to_ms())
 		{
