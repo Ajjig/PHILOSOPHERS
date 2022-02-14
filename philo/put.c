@@ -12,7 +12,7 @@ void	put(int nth, int job)
 	}
 	pthread_mutex_lock(pen);
 	if (job == FORK)
-		printf("%llu %d is taken a fork\n", runtime_to_ms(), nth);
+		printf("%llu %d has taken a fork\n", runtime_to_ms(), nth);
 	else if (job == EAT)
 		printf("%llu %d is eating\n", runtime_to_ms(), nth);
 	else if (job == SLEEP)
