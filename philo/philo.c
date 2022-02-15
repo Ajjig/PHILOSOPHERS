@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/14 23:35:05 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/16 00:10:00 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	new_philo(t_philo *head, int nth, int ac, char **av)
 	new -> time_to_eat = ft_atoi(av[3]);
 	new -> time_to_sleep = ft_atoi(av[4]);
 	new -> number_of_times_each_philosopher_must_eat = -1;
+	new -> last_eat = 0;
 	if (ac == 6)
 		new -> number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
 	new -> next = NULL;
@@ -68,6 +69,7 @@ t_philo	*creat_philos(int ac, char **av)
 	head -> time_to_eat = ft_atoi(av[3]);
 	head -> time_to_sleep = ft_atoi(av[4]);
 	head -> number_of_times_each_philosopher_must_eat = -1;
+	head -> last_eat = 0;
 	if (ac == 6)
 		head -> number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
 	head->next = NULL;
