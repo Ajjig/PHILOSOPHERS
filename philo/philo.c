@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/16 20:59:59 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/16 21:02:19 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,9 +65,9 @@ t_philo	*creat_philos(int ac, char **av)
 {
 	t_philo	*head;
 	t_philo	*last;
-	int		number_of_philos;
+	int		i;
 
-	number_of_philos = ft_atoi(av[1]);
+	i = 2;
 	head = (t_philo *) malloc(sizeof(t_philo));
 	if (head == NULL)
 		return (NULL);
@@ -80,7 +80,7 @@ t_philo	*creat_philos(int ac, char **av)
 	if (ac == 6)
 		head -> number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
 	head->next = NULL;
-	while (number_of_philos--)
+	while (i <= ft_atoi(av[1]))
 		if (new_philo(head, i++, ac, av) == 0)
 			return (NULL);
 	last = head;
