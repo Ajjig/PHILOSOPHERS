@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/16 21:08:08 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/16 22:01:52 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,9 +99,7 @@ void	*philo_routine(void *void_arg)
 	{
 		if (runtime_to_ms() == 0 && philo -> nth % 2 == 0)
 			usleep(philo -> time_to_eat * 1000);
-		pthread_mutex_lock(&philo -> fork);
 		put(philo -> nth, FORK);
-		pthread_mutex_lock(&philo -> next -> fork);
 		philo -> current = EAT;
 		put(philo -> nth, FORK);
 		philo -> last_eat = runtime_to_ms();
@@ -110,8 +108,6 @@ void	*philo_routine(void *void_arg)
 		if (philo -> number_of_times_each_philosopher_must_eat > 0)
 			philo -> number_of_times_each_philosopher_must_eat--;
 		put(philo -> nth, SLEEP);
-		pthread_mutex_unlock(&philo -> fork);
-		pthread_mutex_unlock(&philo -> next -> fork);
 		usleep(philo -> time_to_sleep * 1000);
 		put(philo -> nth, THINK);
 		philo -> current = THINK;
@@ -123,8 +119,9 @@ int	main(int ac, char **av)
 {
 	t_philo		*head;
 	int			number_of_philosophers;
-	pthread_t	health;
+	int			pid;
 
+	pid = getpid();
 	if (args_checker(ac, av))
 		return (1);
 	head = creat_philos(ac, av);
@@ -133,17 +130,14 @@ int	main(int ac, char **av)
 	number_of_philosophers = ft_atoi(av[1]);
 	while (number_of_philosophers--)
 	{
-		pthread_mutex_init(&head -> fork, NULL);
-		pthread_create(&head -> thread_data, NULL, &philo_routine, head);
-		head = head->next;
+		if (getpid() == pid)
+		{
+			head = head -> next;
+			fork();
+		}
 	}
-	pthread_create(&health, NULL, &health_center, head);
-	pthread_join(health, NULL);
-	number_of_philosophers = ft_atoi(av[1]);
-	while (number_of_philosophers--)
-	{
-		pthread_detach(head -> thread_data);
-		head = head -> next;
-	}
+	if (pid != getpid())
+		philo_routine(head);
+	wait(NULL);
 	free_clear(head);
 }

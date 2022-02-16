@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:12:10 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/16 20:44:42 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/16 21:53:03 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ typedef struct s_philo
 {
 	int						nth;
 	struct s_philo			*next;
-	pthread_mutex_t			fork;
-	pthread_t				thread_data;
 	unsigned long long int	current;
 	unsigned long long int	time_to_die;
 	unsigned long long int	time_to_eat;
