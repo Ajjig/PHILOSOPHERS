@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/16 00:10:00 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/16 20:35:30 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ int	main(int ac, char **av)
 	if (args_checker(ac, av))
 		return (1);
 	head = creat_philos(ac, av);
+	if (head == NULL)
+		return (1);
 	number_of_philosophers = ft_atoi(av[1]);
 	while (i++ < number_of_philosophers)
 	{
