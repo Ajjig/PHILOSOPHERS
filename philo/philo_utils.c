@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/14 23:08:34 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/16 20:33:26 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_clear(t_philo *head)
 	next = head;
 	free(head);
 	head = head->next;
-	while (next != head)
+	while (next != head && head != NULL)
 	{
 		free(head);
 		head = head->next;
