@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/16 20:35:30 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/16 20:45:46 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,16 @@ int	ft_atoi(char *str)
 	return (nb);
 }
 
-void	new_philo(t_philo *head, int nth, int ac, char **av)
+int	new_philo(t_philo *head, int nth, int ac, char **av)
 {
 	t_philo	*new;
 
 	new = (t_philo *) malloc(sizeof(t_philo));
+	if (new == NULL)
+	{
+		free_clear(head);
+		return (0);
+	}
 	while (head->next)
 		head = head->next;
 	new -> nth = nth;
@@ -53,6 +58,7 @@ void	new_philo(t_philo *head, int nth, int ac, char **av)
 		new -> number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
 	new -> next = NULL;
 	head -> next = new;
+	return (1);
 }
 
 t_philo	*creat_philos(int ac, char **av)
@@ -64,7 +70,9 @@ t_philo	*creat_philos(int ac, char **av)
 
 	number_of_philos = ft_atoi(av[1]);
 	head = (t_philo *) malloc(sizeof(t_philo));
-	head->nth = 1;
+	if (head == NULL)
+		return (NULL);
+	head -> nth = 1;
 	head -> time_to_die = ft_atoi(av[2]);
 	head -> time_to_eat = ft_atoi(av[3]);
 	head -> time_to_sleep = ft_atoi(av[4]);
@@ -75,7 +83,8 @@ t_philo	*creat_philos(int ac, char **av)
 	head->next = NULL;
 	i = 2;
 	while (i <= number_of_philos)
-		new_philo(head, i++, ac, av);
+		if (new_philo(head, i++, ac, av) == 0)
+			return (NULL);
 	last = head;
 	while (last->next)
 		last = last->next;

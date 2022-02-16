@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:12:10 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/14 23:12:11 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/16 20:44:42 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int						is_all_eat(t_philo *head);
 void					free_clear(t_philo *head);
 void					*philo_routine(void *void_arg);
 t_philo					*creat_philos(int ac, char **av);
-void					new_philo(t_philo *head, int nth, int ac, char **av);
+int						new_philo(t_philo *head, int nth, int ac, char **av);
 int						args_checker(int ac, char **av);
 int						ft_atoi(char *str);
 void					put(int nth, int job);
