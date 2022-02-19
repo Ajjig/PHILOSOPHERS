@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/16 22:01:52 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/19 23:48:22 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	new_philo(t_philo *head, int nth, int ac, char **av)
 	new = (t_philo *) malloc(sizeof(t_philo));
 	if (new == NULL)
 	{
-		free_clear(head);
+		free_clear(head, NULL, NULL);
 		return (0);
 	}
 	while (head->next)
@@ -90,54 +90,69 @@ t_philo	*creat_philos(int ac, char **av)
 	return (head);
 }
 
-void	*philo_routine(void *void_arg)
+void	philo_routine(t_philo *philo, sem_t *forks, sem_t *pen, unsigned long long int start)
 {
-	t_philo	*philo;
+	pthread_t						th;
 
-	philo = (t_philo *) void_arg;
+	pthread_create(&th, NULL, &health_center, philo);
 	while (1)
 	{
-		if (runtime_to_ms() == 0 && philo -> nth % 2 == 0)
+		if (runtime_to_ms(start) == 0 && philo -> nth % 2 == 0)
 			usleep(philo -> time_to_eat * 1000);
-		put(philo -> nth, FORK);
+		sem_wait(forks);
+		put(philo, FORK, pen);
 		philo -> current = EAT;
-		put(philo -> nth, FORK);
-		philo -> last_eat = runtime_to_ms();
-		put(philo -> nth, EAT);
+		sem_wait(forks);
+		put(philo, FORK, pen);
+		philo -> last_eat = runtime_to_ms(start);
+		put(philo, EAT, pen);
 		usleep(philo->time_to_eat * 1000);
 		if (philo -> number_of_times_each_philosopher_must_eat > 0)
 			philo -> number_of_times_each_philosopher_must_eat--;
-		put(philo -> nth, SLEEP);
+		put(philo, SLEEP, pen);
+		sem_post(forks);
+		sem_post(forks);
 		usleep(philo -> time_to_sleep * 1000);
-		put(philo -> nth, THINK);
+		put(philo, THINK, pen);
 		philo -> current = THINK;
 	}
-	return (NULL);
 }
 
 int	main(int ac, char **av)
 {
-	t_philo		*head;
-	int			number_of_philosophers;
-	int			pid;
+	t_philo			*head;
+	unsigned int	number_of_philosophers;
+	int				pid;
+	sem_t			*forks_available;
+	sem_t			*pen;
 
-	pid = getpid();
 	if (args_checker(ac, av))
 		return (1);
 	head = creat_philos(ac, av);
 	if (head == NULL)
 		return (1);
 	number_of_philosophers = ft_atoi(av[1]);
+	forks_available = sem_open("forks", O_CREAT | O_EXCL, 666, number_of_philosophers);
+	pen = sem_open("pen", O_CREAT | O_EXCL, 666, 1);
+	pid = getpid();
 	while (number_of_philosophers--)
 	{
+		head -> pen = pen;
+		head -> start = runtime_to_ms(0);
 		if (getpid() == pid)
 		{
+			head -> pid = fork();
 			head = head -> next;
-			fork();
 		}
 	}
 	if (pid != getpid())
-		philo_routine(head);
+		philo_routine(head, forks_available, pen, head -> start);
 	wait(NULL);
-	free_clear(head);
+	number_of_philosophers = ft_atoi(av[1]);
+	while (number_of_philosophers--)
+	{
+		kill(head -> pid, SIGTERM);
+		head = head -> next;
+	}
+	free_clear(head, pen, forks_available);
 }

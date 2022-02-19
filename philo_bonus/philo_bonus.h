@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:12:10 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/16 21:53:03 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/19 23:48:53 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@
 # include <pthread.h>
 # include <sys/time.h>
 # include <string.h>
+# include <semaphore.h>
+# include <signal.h>
 
 /* STRUCTS */
 
@@ -33,7 +35,9 @@ typedef struct s_philo
 	unsigned long long int	time_to_eat;
 	unsigned long long int	time_to_sleep;
 	unsigned long long int	last_eat;
-	unsigned long long int	n_meals;
+	unsigned long long int	start;
+	int						pid;
+	sem_t					*pen;
 	unsigned long long int	number_of_times_each_philosopher_must_eat;
 }				t_philo;
 
@@ -47,15 +51,15 @@ typedef struct s_philo
 
 /* PROTOTYPES */
 
-unsigned long long int	runtime_to_ms(void);
+unsigned long long int	runtime_to_ms(unsigned long long int start);
 void					*health_center(void *void_arg);
 int						is_all_eat(t_philo *head);
-void					free_clear(t_philo *head);
-void					*philo_routine(void *void_arg);
+void					free_clear(t_philo *head, sem_t *pen, sem_t *forks_available);
+void					philo_routine(t_philo *philo, sem_t *forks_available, sem_t *pen, unsigned long long int start);
 t_philo					*creat_philos(int ac, char **av);
 int						new_philo(t_philo *head, int nth, int ac, char **av);
 int						args_checker(int ac, char **av);
 int						ft_atoi(char *str);
-void					put(int nth, int job);
+void					put(t_philo *philo, int job, sem_t *pen);
 
 #endif
