@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/19 23:48:22 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/20 00:16:15 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	new_philo(t_philo *head, int nth, int ac, char **av)
 	if (new == NULL)
 	{
 		free_clear(head, NULL, NULL);
-		return (0);
+		exit(0);
 	}
 	while (head->next)
 		head = head->next;
@@ -81,8 +81,7 @@ t_philo	*creat_philos(int ac, char **av)
 		head -> number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
 	head->next = NULL;
 	while (i <= ft_atoi(av[1]))
-		if (new_philo(head, i++, ac, av) == 0)
-			return (NULL);
+		new_philo(head, i++, ac, av);
 	last = head;
 	while (last->next)
 		last = last->next;
@@ -129,8 +128,6 @@ int	main(int ac, char **av)
 	if (args_checker(ac, av))
 		return (1);
 	head = creat_philos(ac, av);
-	if (head == NULL)
-		return (1);
 	number_of_philosophers = ft_atoi(av[1]);
 	forks_available = sem_open("forks", O_CREAT | O_EXCL, 666, number_of_philosophers);
 	pen = sem_open("pen", O_CREAT | O_EXCL, 666, 1);
