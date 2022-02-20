@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:12:10 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/20 21:43:01 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/20 23:03:03 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ typedef struct s_philo
 	unsigned long long int	number_of_times_each_philosopher_must_eat;
 }				t_philo;
 
+typedef struct s_sems
+{
+	sem_t	*pen;
+	sem_t	*forks;
+	sem_t	*all;
+}				t_sems;
+
 /* DEFINES */
 
 # define THINK 1
@@ -56,8 +63,8 @@ typedef struct s_philo
 unsigned long long int	runtime_to_ms(unsigned long long int start);
 void					*health_center(void *void_arg);
 int						is_all_eat(t_philo *head);
-void					free_clear(t_philo *head, sem_t *pen, sem_t *forks_available);
-void					philo_routine(t_philo *philo, sem_t *forks_available, sem_t *pen, unsigned long long int start);
+void					free_clear(t_philo *head, t_sems *sems);
+void					philo_routine(t_philo *philo, t_sems *sems, unsigned long long int start);
 t_philo					*creat_philos(int ac, char **av);
 int						new_philo(t_philo *head, int nth, int ac, char **av);
 int						args_checker(int ac, char **av);
