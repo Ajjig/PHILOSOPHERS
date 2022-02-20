@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/20 00:14:02 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/20 21:44:50 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,11 @@ void	free_clear(t_philo *head, sem_t *pen, sem_t *forks_available)
 void	*health_center(void *void_arg)
 {
 	t_philo					*philo;
-	int						pid;
 	unsigned long long int	start = 0;
 
 	philo = (t_philo *) void_arg;
 	if (start == 0)
 		start = philo -> start;
-	pid = getpid();
 
 	while (1)
 	{
