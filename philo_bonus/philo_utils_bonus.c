@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/20 21:44:50 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/20 22:20:46 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,10 @@ void	free_clear(t_philo *head, sem_t *pen, sem_t *forks_available)
 	sem_unlink("pen");
 	sem_unlink("forks");
 	next = head;
-	free(head);
-	head = head->next;
 	while (next != head && head != NULL)
 	{
-		free(head);
 		head = head->next;
+		free(head);
 	}
 }
 
