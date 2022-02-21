@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/21 17:28:39 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:37:44 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	new_philo(t_philo *head, int nth, int ac, char **av)
 		free_clear(head, NULL);
 		exit(0);
 	}
+	unlink_sems();
 	while (head->next)
 		head = head->next;
 	new -> nth = nth;

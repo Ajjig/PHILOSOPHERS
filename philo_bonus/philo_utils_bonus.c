@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/21 17:18:39 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:36:49 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,12 @@ int	args_checker(int ac, char **av)
 		if (ft_atoi(av[i++]) <= 0)
 			return (write(STDERR_FILENO, "Error:\nA non-valid argument\n", 28));
 	return (0);
+}
+
+void	unlink_sems(void)
+{
+	sem_unlink("forks");
+	sem_unlink("pen");
+	sem_unlink("one");
+	sem_unlink("all");
 }
