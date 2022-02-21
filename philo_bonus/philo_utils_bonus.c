@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/20 23:07:52 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/21 02:01:55 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,20 @@ void	free_clear(t_philo *head, t_sems *sems)
 {
 	t_philo	*next;
 
+
+	next = head;
+	while (next != head && head != NULL)
+	{
+		head = head -> next;
+		kill (head -> pid, SIGTERM);
+		free(head);
+	}
 	sem_close(sems -> pen);
 	sem_close(sems -> forks);
 	sem_close(sems -> all);
 	sem_unlink("pen");
 	sem_unlink("forks");
 	sem_unlink("all");
-	next = head;
-	while (next != head && head != NULL)
-	{
-		head = head->next;
-		free(head);
-	}
 }
 
 void	*health_center(void *void_arg)
