@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/21 17:37:44 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/21 18:17:14 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int	main(int ac, char **av)
 	unsigned int	number_of_philosophers;
 	int				pid;
 	t_sems			sems;
+	pthread_t		thread;
 
 	if (args_checker(ac, av))
 		return (1);
@@ -146,6 +147,7 @@ int	main(int ac, char **av)
 	}
 	if (pid != getpid())
 		philo_routine(head, &sems, head -> start);
+	pthread_create(&thread, NULL, &wait_for_all, head);
 	sem_wait(sems . one);
 	free_clear(head, &sems);
 }

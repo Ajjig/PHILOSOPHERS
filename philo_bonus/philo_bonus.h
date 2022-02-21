@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:12:10 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/21 17:35:49 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:56:19 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,6 @@ int						args_checker(int ac, char **av);
 int						ft_atoi(char *str);
 void					put(t_philo *philo, int job, sem_t *pen);
 void					unlink_sems(void);
+void					*wait_for_all(void *void_arg);
 
 #endif

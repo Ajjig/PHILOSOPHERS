@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/21 17:36:49 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/21 18:21:05 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ void	*health_center(void *void_arg)
 
 	while (1)
 	{
+		if (philo -> number_of_times_each_philosopher_must_eat == 0)
+		{
+			sem_post(philo -> sems -> all);
+			philo -> number_of_times_each_philosopher_must_eat--;
+		}
 		if (philo -> last_eat + philo -> time_to_die + 5 < runtime_to_ms(start))
 		{
 			put(philo, DEAD, philo -> sems -> pen);
