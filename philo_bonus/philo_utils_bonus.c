@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   philo_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/02/21 18:21:05 by ajjig            ###   ########.fr       */
+=======
+/*   Updated: 2022/02/21 19:52:59 by majjig           ###   ########.fr       */
+>>>>>>> cc79b2fe7e674dd87c10edd5543cc8b8499a3f65
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +60,16 @@ void	*health_center(void *void_arg)
 
 	while (1)
 	{
+<<<<<<< HEAD
 		if (philo -> number_of_times_each_philosopher_must_eat == 0)
 		{
 			sem_post(philo -> sems -> all);
 			philo -> number_of_times_each_philosopher_must_eat--;
 		}
 		if (philo -> last_eat + philo -> time_to_die + 5 < runtime_to_ms(start))
+=======
+		if (philo -> last_eat + philo -> time_to_die < runtime_to_ms(start))
+>>>>>>> cc79b2fe7e674dd87c10edd5543cc8b8499a3f65
 		{
 			put(philo, DEAD, philo -> sems -> pen);
 			sem_post(philo -> sems -> one);
