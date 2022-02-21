@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:12:10 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/21 22:58:29 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 00:46:53 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_philo
 	unsigned long long int	time_to_die;
 	unsigned long long int	time_to_eat;
 	unsigned long long int	time_to_sleep;
+	int						nof;
 	unsigned long long int	last_eat;
 	unsigned long long int	start;
 	t_pids					*pids;
