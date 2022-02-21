@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 00:32:36 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 00:56:56 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	free_clear(t_philo *head, t_sems *sems)
 {
 	while (head -> pids)
 	{
-		kill (head -> pids -> pid, SIGTERM);
+		kill (head -> pids -> pid, SIGQUIT);
 		free(head -> pids);
 		head -> pids = head -> pids -> next;
 	}
@@ -50,7 +50,6 @@ void	*health_center(void *void_arg)
 	philo = (t_philo *) void_arg;
 	if (start == 0)
 		start = philo -> start;
-
 	while (1)
 	{
 		if (philo -> number_of_times_each_philosopher_must_eat == 0)
@@ -62,7 +61,7 @@ void	*health_center(void *void_arg)
 		{
 			put(philo, DEAD, philo -> sems -> pen);
 			sem_post(philo -> sems -> one);
-			exit(0);
+			return (NULL);
 		}
 		usleep(500);
 	}
