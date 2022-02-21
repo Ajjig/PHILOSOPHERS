@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/21 23:23:31 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 00:08:47 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	free_clear(t_philo *head, t_sems *sems)
 {
 	while (head -> pids)
 	{
-		puts("KIll");
-		printf("%d\n", head -> pids -> pid);
 		kill (head -> pids -> pid, SIGTERM);
 		free(head -> pids);
 		head -> pids = head -> pids -> next;
