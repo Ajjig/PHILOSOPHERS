@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/21 18:17:14 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/21 23:26:02 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,43 +36,42 @@ int	ft_atoi(char *str)
 	return (nb);
 }
 
-int	new_philo(t_philo *head, int nth, int ac, char **av)
+t_pids	*pid_new(void)
 {
-	t_philo	*new;
+	t_pids	*new;
 
-	new = (t_philo *) malloc(sizeof(t_philo));
-	if (new == NULL)
-	{
-		free_clear(head, NULL);
-		exit(0);
-	}
-	unlink_sems();
-	while (head->next)
-		head = head->next;
-	new -> nth = nth;
-	new -> time_to_die = ft_atoi(av[2]);
-	new -> time_to_eat = ft_atoi(av[3]);
-	new -> time_to_sleep = ft_atoi(av[4]);
-	new -> number_of_times_each_philosopher_must_eat = -1;
-	new -> last_eat = 0;
-	if (ac == 6)
-		new -> number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
+	new = (t_pids *) malloc(sizeof(t_pids));
 	new -> next = NULL;
-	head -> next = new;
-	return (1);
+	return (new);
+}
+
+t_pids	*pids_handler(number_of_philosophers)
+{
+	t_pids	*pids;
+	t_pids	*new;
+
+	pids = (t_pids *) malloc(sizeof(t_pids));
+	pids -> next = NULL;
+	new = pids;
+	while (--number_of_philosophers)
+	{
+		new -> next = pid_new();
+		new = new -> next;
+		new -> next = NULL;
+	}
+	return (pids);
 }
 
 t_philo	*creat_philos(int ac, char **av)
 {
 	t_philo	*head;
-	t_philo	*last;
 	int		i;
 
 	i = 2;
 	head = (t_philo *) malloc(sizeof(t_philo));
 	if (head == NULL)
 		return (NULL);
-	head -> nth = 1;
+	head -> nth = 0;
 	head -> time_to_die = ft_atoi(av[2]);
 	head -> time_to_eat = ft_atoi(av[3]);
 	head -> time_to_sleep = ft_atoi(av[4]);
@@ -80,21 +79,14 @@ t_philo	*creat_philos(int ac, char **av)
 	head -> last_eat = 0;
 	if (ac == 6)
 		head -> number_of_times_each_philosopher_must_eat = ft_atoi(av[5]);
-	head->next = NULL;
-	while (i <= ft_atoi(av[1]))
-		new_philo(head, i++, ac, av);
-	last = head;
-	while (last->next)
-		last = last->next;
-	last->next = head;
+	unlink_sems();
 	return (head);
 }
-
 void	philo_routine(t_philo *philo, t_sems *sems, unsigned long long int start)
 {
 	pthread_t						th;
 
-	pthread_create(&th, NULL, &health_center, philo);	
+	pthread_create(&th, NULL, &health_center, philo);
 	while (1)
 	{
 		if (runtime_to_ms(start) == 0 && philo -> nth % 2 == 0)
@@ -125,11 +117,14 @@ int	main(int ac, char **av)
 	int				pid;
 	t_sems			sems;
 	pthread_t		thread;
+	t_pids			*temp;
 
 	if (args_checker(ac, av))
 		return (1);
 	head = creat_philos(ac, av);
 	number_of_philosophers = ft_atoi(av[1]);
+	head -> pids = pids_handler(number_of_philosophers);
+	temp = head -> pids;
 	sems . forks = sem_open("forks", O_CREAT | O_EXCL, 666, number_of_philosophers);
 	sems . pen = sem_open("pen", O_CREAT | O_EXCL, 666, 1);
 	sems . all = sem_open("all", O_CREAT | O_EXCL, 666, 0);
@@ -141,8 +136,9 @@ int	main(int ac, char **av)
 		head -> start = runtime_to_ms(0);
 		if (getpid() == pid)
 		{
-			head -> pid = fork();
-			head = head -> next;
+			temp -> pid = fork();
+			temp = temp -> next;
+			head -> nth ++;
 		}
 	}
 	if (pid != getpid())

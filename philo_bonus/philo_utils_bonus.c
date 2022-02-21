@@ -6,11 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/02/21 18:21:05 by ajjig            ###   ########.fr       */
-=======
-/*   Updated: 2022/02/21 19:52:59 by majjig           ###   ########.fr       */
->>>>>>> cc79b2fe7e674dd87c10edd5543cc8b8499a3f65
+/*   Updated: 2022/02/21 23:23:31 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +25,15 @@ unsigned long long int	runtime_to_ms(unsigned long long int start)
 
 void	free_clear(t_philo *head, t_sems *sems)
 {
-	t_philo	*next;
-
-
-	next = head;
-	while (next != head && head != NULL)
+	while (head -> pids)
 	{
-		head = head -> next;
-		kill (head -> pid, SIGTERM);
-		free(head);
+		puts("KIll");
+		printf("%d\n", head -> pids -> pid);
+		kill (head -> pids -> pid, SIGTERM);
+		free(head -> pids);
+		head -> pids = head -> pids -> next;
 	}
+	free(head);
 	sem_close(sems -> pen);
 	sem_close(sems -> forks);
 	sem_close(sems -> all);
@@ -60,21 +55,18 @@ void	*health_center(void *void_arg)
 
 	while (1)
 	{
-<<<<<<< HEAD
 		if (philo -> number_of_times_each_philosopher_must_eat == 0)
 		{
 			sem_post(philo -> sems -> all);
 			philo -> number_of_times_each_philosopher_must_eat--;
 		}
-		if (philo -> last_eat + philo -> time_to_die + 5 < runtime_to_ms(start))
-=======
 		if (philo -> last_eat + philo -> time_to_die < runtime_to_ms(start))
->>>>>>> cc79b2fe7e674dd87c10edd5543cc8b8499a3f65
 		{
 			put(philo, DEAD, philo -> sems -> pen);
 			sem_post(philo -> sems -> one);
 			exit(0);
 		}
+		usleep(500);
 	}
 	return (NULL);
 }

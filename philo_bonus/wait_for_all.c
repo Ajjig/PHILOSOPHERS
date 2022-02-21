@@ -3,17 +3,14 @@
 void    *wait_for_all(void *void_arg)
 {
     t_philo *philo;
-    t_philo *next;
 
     philo = (t_philo *) void_arg;
-    next = philo -> next;
-    while (next != philo)
+    while (philo -> pids)
     {
         sem_wait(philo -> sems -> all);
-        next = next -> next;
+        philo -> pids = philo -> pids -> next;
     }
     sem_wait(philo -> sems -> all);
-    free_clear(philo, philo -> sems);
-    exit(0);
+    sem_post(philo -> sems -> one);
     return (NULL);
 }

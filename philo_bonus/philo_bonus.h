@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
+/*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:12:10 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/21 17:56:19 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/21 22:58:29 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,22 @@ typedef struct s_sems
 	sem_t	*one;
 }				t_sems;
 
+typedef struct s_pids
+{
+	int				pid;
+	struct s_pids	*next;
+}				t_pids;
+
 typedef struct s_philo
 {
 	int						nth;
-	struct s_philo			*next;
 	unsigned long long int	current;
 	unsigned long long int	time_to_die;
 	unsigned long long int	time_to_eat;
 	unsigned long long int	time_to_sleep;
 	unsigned long long int	last_eat;
 	unsigned long long int	start;
-	int						pid;
+	t_pids					*pids;
 	t_sems					*sems;
 	unsigned long long int	number_of_times_each_philosopher_must_eat;
 }				t_philo;
