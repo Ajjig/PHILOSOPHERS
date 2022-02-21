@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/21 23:26:02 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 00:20:54 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,8 @@ int	main(int ac, char **av)
 	if (pid != getpid())
 		philo_routine(head, &sems, head -> start);
 	pthread_create(&thread, NULL, &wait_for_all, head);
+	pthread_detach(thread);
 	sem_wait(sems . one);
 	free_clear(head, &sems);
+	return (0);
 }
