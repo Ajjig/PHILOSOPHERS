@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:12:10 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/20 23:03:03 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:13:05 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@
 
 /* STRUCTS */
 
+typedef struct s_sems
+{
+	sem_t	*pen;
+	sem_t	*forks;
+	sem_t	*all;
+	sem_t	*one;
+}				t_sems;
+
 typedef struct s_philo
 {
 	int						nth;
@@ -39,16 +47,9 @@ typedef struct s_philo
 	unsigned long long int	last_eat;
 	unsigned long long int	start;
 	int						pid;
-	sem_t					*pen;
+	t_sems					*sems;
 	unsigned long long int	number_of_times_each_philosopher_must_eat;
 }				t_philo;
-
-typedef struct s_sems
-{
-	sem_t	*pen;
-	sem_t	*forks;
-	sem_t	*all;
-}				t_sems;
 
 /* DEFINES */
 

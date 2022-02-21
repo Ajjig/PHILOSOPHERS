@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/21 02:01:55 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:18:39 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,11 @@ void	free_clear(t_philo *head, t_sems *sems)
 	sem_close(sems -> pen);
 	sem_close(sems -> forks);
 	sem_close(sems -> all);
+	sem_close(sems -> one);
 	sem_unlink("pen");
 	sem_unlink("forks");
 	sem_unlink("all");
+	sem_unlink("one");
 }
 
 void	*health_center(void *void_arg)
@@ -56,7 +58,8 @@ void	*health_center(void *void_arg)
 	{
 		if (philo -> last_eat + philo -> time_to_die + 5 < runtime_to_ms(start))
 		{
-			put(philo, DEAD, philo -> pen);
+			put(philo, DEAD, philo -> sems -> pen);
+			sem_post(philo -> sems -> one);
 			exit(0);
 		}
 	}

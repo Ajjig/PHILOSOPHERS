@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/20 23:07:00 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/21 17:28:39 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	philo_routine(t_philo *philo, t_sems *sems, unsigned long long int start)
 {
 	pthread_t						th;
 
-	pthread_create(&th, NULL, &health_center, philo);
+	pthread_create(&th, NULL, &health_center, philo);	
 	while (1)
 	{
 		if (runtime_to_ms(start) == 0 && philo -> nth % 2 == 0)
@@ -131,10 +131,11 @@ int	main(int ac, char **av)
 	sems . forks = sem_open("forks", O_CREAT | O_EXCL, 666, number_of_philosophers);
 	sems . pen = sem_open("pen", O_CREAT | O_EXCL, 666, 1);
 	sems . all = sem_open("all", O_CREAT | O_EXCL, 666, 0);
+	sems . one = sem_open("one", O_CREAT | O_EXCL, 666, 0);
 	pid = getpid();
 	while (number_of_philosophers--)
 	{
-		head -> pen = sems . pen;
+		head -> sems = &sems;
 		head -> start = runtime_to_ms(0);
 		if (getpid() == pid)
 		{
@@ -144,12 +145,6 @@ int	main(int ac, char **av)
 	}
 	if (pid != getpid())
 		philo_routine(head, &sems, head -> start);
-	wait(NULL);
-	number_of_philosophers = ft_atoi(av[1]);
-	while (number_of_philosophers--)
-	{
-		kill(head -> pid, SIGTERM);
-		head = head -> next;
-	}
+	sem_wait(sems . one);
 	free_clear(head, &sems);
 }
