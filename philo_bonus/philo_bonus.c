@@ -6,7 +6,7 @@
 /*   By: ajjig <ajjig@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/20 23:21:48 by ajjig            ###   ########.fr       */
+/*   Updated: 2022/02/20 23:07:00 by ajjig            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,12 @@ int	main(int ac, char **av)
 	}
 	if (pid != getpid())
 		philo_routine(head, &sems, head -> start);
-	pthread_create(&sems . thread, NULL, &);
 	wait(NULL);
+	number_of_philosophers = ft_atoi(av[1]);
+	while (number_of_philosophers--)
+	{
+		kill(head -> pid, SIGTERM);
+		head = head -> next;
+	}
 	free_clear(head, &sems);
 }
