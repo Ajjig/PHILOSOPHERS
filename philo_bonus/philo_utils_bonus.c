@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 20:10:51 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 20:28:09 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ void	free_clear(t_philo *head, t_sems *sems)
 		head -> pids = head -> pids -> next;
 	}
 	free(head);
-	sem_post(sems -> pen);
-	sem_close(sems -> pen);
 	sem_close(sems -> forks);
 	sem_close(sems -> all);
 	sem_close(sems -> one);
