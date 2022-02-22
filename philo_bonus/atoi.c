@@ -6,11 +6,11 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 01:08:49 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 01:08:50 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 01:10:22 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "philo_bonus.h"
 
 int	ft_atoi(char *str)
 {
