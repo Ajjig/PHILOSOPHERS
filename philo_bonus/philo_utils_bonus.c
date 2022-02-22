@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 20:28:09 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 20:34:26 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ int	args_checker(int ac, char **av)
 
 	i = 1;
 	if (ac > 6)
-		return (write(STDERR_FILENO, "Error:\nToo many args\n", 21));
+		exit(write(STDERR_FILENO, "Error:\nToo many args\n", 21));
 	if (ac < 5)
-		return (write(STDERR_FILENO, "Error:\nArguments needed\n", 24));
+		exit(write(STDERR_FILENO, "Error:\nArguments needed\n", 24));
 	while (i < ac)
 		if (ft_atoi(av[i++]) <= 0)
-			return (write(STDERR_FILENO, "Error:\nA non-valid argument\n", 28));
+			exit(write(STDERR_FILENO, "Error:\nA non-valid argument\n", 28));
 	return (0);
 }
 
