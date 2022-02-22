@@ -6,12 +6,12 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:12:10 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 00:46:53 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 01:14:37 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#ifndef PHILO_BONUS_H
+# define PHILO_BONUS_H
 
 /* INCLUDES */
 
@@ -71,7 +71,8 @@ unsigned long long int	runtime_to_ms(unsigned long long int start);
 void					*health_center(void *void_arg);
 int						is_all_eat(t_philo *head);
 void					free_clear(t_philo *head, t_sems *sems);
-void					philo_routine(t_philo *philo, t_sems *sems, unsigned long long int start);
+void					philo_routine(t_philo *philo, t_sems *sems,
+							unsigned long long start);
 t_philo					*creat_philos(int ac, char **av);
 int						new_philo(t_philo *head, int nth, int ac, char **av);
 int						args_checker(int ac, char **av);
