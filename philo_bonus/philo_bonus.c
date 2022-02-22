@@ -6,35 +6,11 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 00:48:46 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 01:08:08 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo_bonus.h"
-
-int	ft_atoi(char *str)
-{
-	int	i;
-	int	nb;
-	int	tmp;
-
-	i = 0;
-	nb = 0;
-	tmp = 0;
-	if (str[i] == '+')
-		i++;
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		nb = (str[i] - '0') + (nb * 10);
-		i++;
-		if (nb < tmp)
-			return (0);
-		tmp = nb;
-	}
-	if (str[i] != 0)
-		return (0);
-	return (nb);
-}
 
 t_pids	*pid_new(void)
 {
@@ -45,7 +21,7 @@ t_pids	*pid_new(void)
 	return (new);
 }
 
-t_pids	*pids_handler(number_of_philosophers)
+t_pids	*pids_handler(int number_of_philosophers)
 {
 	t_pids	*pids;
 	t_pids	*new;
@@ -82,6 +58,7 @@ t_philo	*creat_philos(int ac, char **av)
 	unlink_sems();
 	return (head);
 }
+
 void	philo_routine(t_philo *philo, t_sems *sems, unsigned long long int start)
 {
 	pthread_t						th;
@@ -132,19 +109,16 @@ int	main(int ac, char **av)
 	head -> sems = &sems;
 	head -> start = runtime_to_ms(0);
 	while (head -> nof --)
-	{
 		if (getpid() == pid)
 		{
 			temp -> pid = fork();
 			temp = temp -> next;
 			head -> nth ++;
 		}
-	}
 	if (pid != getpid())
 		philo_routine(head, &sems, head -> start);
 	head -> nof = ft_atoi(av[1]);
 	pthread_create(&thread, NULL, &wait_for_all, head);
 	sem_wait(sems . one);
 	free_clear(head, &sems);
-	return (0);
 }
