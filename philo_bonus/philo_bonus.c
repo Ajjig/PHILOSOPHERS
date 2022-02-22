@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 01:12:19 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 01:33:02 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ int	main(int ac, char **av)
 			head -> nth ++;
 		}
 	}
+	head -> nof = ft_atoi(av[1]);
 	if (pid != getpid())
 		philo_routine(head, &sems, head -> start);
 	head -> nof = ft_atoi(av[1]);
