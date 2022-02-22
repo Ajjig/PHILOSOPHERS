@@ -23,4 +23,7 @@ clean:
 fclean: clean
 	-@rm -rf $(NAME)
 
+bonus:
+	make -C ../philo_bonus/
+
 re: fclean all
