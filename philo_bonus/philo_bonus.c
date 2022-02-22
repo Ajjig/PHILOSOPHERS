@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 01:08:08 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 01:12:19 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_philo	*creat_philos(int ac, char **av)
 	return (head);
 }
 
-void	philo_routine(t_philo *philo, t_sems *sems, unsigned long long int start)
+void	philo_routine(t_philo *philo, t_sems *sems, unsigned long long start)
 {
 	pthread_t						th;
 
@@ -109,12 +109,14 @@ int	main(int ac, char **av)
 	head -> sems = &sems;
 	head -> start = runtime_to_ms(0);
 	while (head -> nof --)
+	{
 		if (getpid() == pid)
 		{
 			temp -> pid = fork();
 			temp = temp -> next;
 			head -> nth ++;
 		}
+	}
 	if (pid != getpid())
 		philo_routine(head, &sems, head -> start);
 	head -> nof = ft_atoi(av[1]);
