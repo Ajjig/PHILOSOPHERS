@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 20:34:26 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 21:06:05 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,10 @@ void	free_clear(t_philo *head, t_sems *sems)
 void	*health_center(void *void_arg)
 {
 	t_philo					*philo;
-	unsigned long long int	start = 0;
+	unsigned long long int	start;
 
 	philo = (t_philo *) void_arg;
-	if (start == 0)
-		start = philo -> start;
+	start = philo -> start;
 	while (1)
 	{
 		if (philo -> number_of_times_each_philosopher_must_eat == 0)
@@ -69,9 +68,10 @@ void	*health_center(void *void_arg)
 	return (NULL);
 }
 
-int	args_checker(int ac, char **av)
+t_philo	*args_checker(int ac, char **av, t_sems *sems)
 {
-	int	i;
+	int		i;
+	t_philo	*head;
 
 	i = 1;
 	if (ac > 6)
@@ -81,7 +81,14 @@ int	args_checker(int ac, char **av)
 	while (i < ac)
 		if (ft_atoi(av[i++]) <= 0)
 			exit(write(STDERR_FILENO, "Error:\nA non-valid argument\n", 28));
-	return (0);
+	head = creat_philos(ac, av);
+	head -> pids = pids_handler(head -> nof);
+	sems -> forks = sem_open("forks", O_CREAT | O_EXCL, 666, head -> nof);
+	sems -> pen = sem_open("pen", O_CREAT | O_EXCL, 666, 1);
+	sems -> all = sem_open("all", O_CREAT | O_EXCL, 666, 0);
+	sems -> one = sem_open("one", O_CREAT | O_EXCL, 666, 0);
+	head -> sems = sems;
+	return (head);
 }
 
 void	unlink_sems(void)

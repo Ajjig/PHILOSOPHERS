@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:12:10 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 01:14:37 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 21:02:19 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,10 +75,11 @@ void					philo_routine(t_philo *philo, t_sems *sems,
 							unsigned long long start);
 t_philo					*creat_philos(int ac, char **av);
 int						new_philo(t_philo *head, int nth, int ac, char **av);
-int						args_checker(int ac, char **av);
+t_philo					*args_checker(int ac, char **av, t_sems *sems);
 int						ft_atoi(char *str);
 void					put(t_philo *philo, int job, sem_t *pen);
 void					unlink_sems(void);
 void					*wait_for_all(void *void_arg);
+t_pids					*pids_handler(int number_of_philosophers);
 
 #endif

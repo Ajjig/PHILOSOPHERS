@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:17:02 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/19 23:34:54 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 21:06:31 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	put(t_philo *philo, int job, sem_t *pen)
 {
-	static unsigned long long int start = 0;
+	static unsigned long long int	start = 0;
 
 	if (start == 0)
 		start = philo -> start;

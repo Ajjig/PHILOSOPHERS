@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 20:33:49 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 21:04:54 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,20 +92,13 @@ int	main(int ac, char **av)
 {
 	t_philo			*head;
 	int				pid;
-	t_sems			sems;
 	pthread_t		thread;
 	t_pids			*temp;
+	t_sems			sems;
 
-	args_checker(ac, av);
-	head = creat_philos(ac, av);
-	head -> pids = pids_handler(head -> nof);
+	head = args_checker(ac, av, &sems);
 	temp = head -> pids;
-	sems . forks = sem_open("forks", O_CREAT | O_EXCL, 666, head -> nof);
-	sems . pen = sem_open("pen", O_CREAT | O_EXCL, 666, 1);
-	sems . all = sem_open("all", O_CREAT | O_EXCL, 666, 0);
-	sems . one = sem_open("one", O_CREAT | O_EXCL, 666, 0);
 	pid = getpid();
-	head -> sems = &sems;
 	while (head -> nof --)
 	{
 		if (getpid() == pid)
@@ -118,9 +111,8 @@ int	main(int ac, char **av)
 	head -> nof = ft_atoi(av[1]);
 	head -> start = runtime_to_ms(0);
 	if (pid != getpid())
-		philo_routine(head, &sems, head -> start);
-	head -> nof = ft_atoi(av[1]);
+		philo_routine(head, head -> sems, head -> start);
 	pthread_create(&thread, NULL, &wait_for_all, head);
-	sem_wait(sems . one);
-	free_clear(head, &sems);
+	sem_wait(head -> sems -> one);
+	free_clear(head, head -> sems);
 }
