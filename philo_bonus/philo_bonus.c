@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 20:20:36 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 20:32:07 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_philo	*creat_philos(int ac, char **av)
 	if (head == NULL)
 		return (NULL);
 	head -> nth = 0;
+	head -> nof = ft_atoi(av[1]);
 	head -> time_to_die = ft_atoi(av[2]);
 	head -> time_to_eat = ft_atoi(av[3]);
 	head -> time_to_sleep = ft_atoi(av[4]);
@@ -98,7 +99,6 @@ int	main(int ac, char **av)
 	if (args_checker(ac, av))
 		return (1);
 	head = creat_philos(ac, av);
-	head -> nof = ft_atoi(av[1]);
 	head -> pids = pids_handler(head -> nof);
 	temp = head -> pids;
 	sems . forks = sem_open("forks", O_CREAT | O_EXCL, 666, head -> nof);
