@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:15:07 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/22 21:04:54 by majjig           ###   ########.fr       */
+/*   Updated: 2022/02/22 21:22:04 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ int	main(int ac, char **av)
 	head = args_checker(ac, av, &sems);
 	temp = head -> pids;
 	pid = getpid();
+	head -> start = runtime_to_ms(0);
 	while (head -> nof --)
 	{
 		if (getpid() == pid)
@@ -109,7 +110,6 @@ int	main(int ac, char **av)
 		}
 	}
 	head -> nof = ft_atoi(av[1]);
-	head -> start = runtime_to_ms(0);
 	if (pid != getpid())
 		philo_routine(head, head -> sems, head -> start);
 	pthread_create(&thread, NULL, &wait_for_all, head);
