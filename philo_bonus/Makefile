@@ -14,8 +14,10 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror -pthread
 
-all: $(OBJS) $(INC)
-	@$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
+all: $(NAME)
+
+$(NAME): $(OBJS) $(INC)
+	$(CC) $(CFLAGS) $(SRCS) -o $(NAME)
 
 clean:
 	-@rm -rf $(OBJS)
