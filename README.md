@@ -15,12 +15,15 @@ git clone <Repo link> philosophers
 ```
 then to compile multi-threads part:
 ```Bash
-cd philo/ && make
+cd philo/ && make && ./philo 6 500 200 200 6
 ```
 and for multi-prpcesses part:
 ```Bash
-cd philo_bonus && make bonus
+cd philo_bonus && make bonus && ./philo_bonus 6 500 200 200 5
 ```
+(*) Avoid testing time aguments with values less than 60ms
+
+(**) Avoid teating with number_of_philosophers > 200
 
 # RULES
 • This project is to be coded in C, following the 42 Norm. Any leak, crash, undefined
