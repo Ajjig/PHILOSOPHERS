@@ -15,11 +15,11 @@ git clone <Repo link> philosophers
 ```
 then to compile multi-threads part:
 ```Bash
-cd philo/ && make && ./philo 6 500 200 200 6
+cd philosophers/philo/ && make && ./philo 6 500 200 200 6
 ```
 and for multi-prpcesses part:
 ```Bash
-cd philo_bonus && make bonus && ./philo_bonus 6 500 200 200 5
+cd philosophers/philo_bonus && make bonus && ./philo_bonus 6 500 200 200 5
 ```
 (*) Avoid testing time aguments with values less than 60ms
 
