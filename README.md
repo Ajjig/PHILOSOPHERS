@@ -4,9 +4,23 @@ This project is a training to multi-threads && multi-processes programming with 
 It contains 2 (processes and threads) different programs simulating a twist of the famous Dining Philosophers problem, all with the same basic rules.
 This project is also a good lesson in C optimization as we need to save every bit of CPU usage we can to ensure the survival of all our philosophers.
 
-philo_one: multi-threads and use of mutex
-philo_two: multi-threads and use of semaphore
-philo_three: multi-processes and use of semaphore
+philo/ : multi-threads and use of mutex
+philo_bonus/ : multi-processes and use of semaphore
+
+# How to use
+
+for unix-like users you can  basically paste this command in terminal
+```Bash
+git clone <Repo link> philosophers
+```
+then to compile multi-threads part:
+```Bash
+cd philo/ && make
+```
+and for multi-prpcesses part:
+```Bash
+cd philo_bonus && make bonus
+```
 
 # RULES
 • This project is to be coded in C, following the 42 Norm. Any leak, crash, undefined
