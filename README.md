@@ -17,7 +17,7 @@ then to compile multi-threads part:
 ```Bash
 cd philosophers/philo/ && make && ./philo 6 500 200 200 6
 ```
-and for multi-prpcesses part:
+or for multi-processes part:
 ```Bash
 cd philosophers/philo_bonus && make bonus && ./philo_bonus 6 500 200 200 5
 ```
