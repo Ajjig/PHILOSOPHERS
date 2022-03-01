@@ -1,7 +1,7 @@
 # PHILOSOPHERS
 
 This project is a training to multi-threads && multi-processes programming with the use of mutex and semaphores.
-It contains 2 (processes and threads) different programs simulating a twist of the famous Dining Philosophers problem, all with the same basic rules.
+It contains 2 programs (processes part and threads part) different programs simulating a twist of the famous Dining Philosophers problem, all with the same basic rules.
 This project is also a good lesson in C optimization as we need to save every bit of CPU usage we can to ensure the survival of all our philosophers.
 
 philo/ : multi-threads and use of mutex
