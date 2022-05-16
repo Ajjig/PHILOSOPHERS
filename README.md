@@ -23,7 +23,7 @@ cd philosophers/philo_bonus && make bonus && ./philo_bonus 6 500 200 200 5
 ```
 (*) Avoid testing time aguments with values less than 60ms
 
-(**) Avoid testing with number_of_philosophers > 200
+(**) Avoid testing with number_of_philosophers > 200 (if you did your compuer may crash)
 
 # RULES
 • This project is to be coded in C, following the 42 Norm. Any leak, crash, undefined
