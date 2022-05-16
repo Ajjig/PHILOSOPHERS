@@ -11,7 +11,7 @@ philo_bonus/ : multi-processes and use of semaphore
 
 for unix-like users you can  basically paste this command in terminal
 ```Bash
-git clone <Repo link> philosophers
+git clone {Repo link} philosophers
 ```
 then to compile multi-threads part:
 ```Bash
