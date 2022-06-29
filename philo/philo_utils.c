@@ -64,7 +64,7 @@ void	*health_center(void *void_arg)
 		if (philo -> number_of_times_each_philosopher_must_eat
 			== 0 && is_all_eat(philo))
 			return (NULL);
-		if (philo -> last_eat + philo -> time_to_die + 5 < runtime_to_ms())
+		if (philo -> last_eat + philo -> time_to_die < runtime_to_ms())
 		{
 			put(philo -> nth, DEAD);
 			return (NULL);
