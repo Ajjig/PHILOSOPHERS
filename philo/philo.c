@@ -97,7 +97,7 @@ void	*philo_routine(void *void_arg)
 	philo = (t_philo *) void_arg;
 	while (1)
 	{
-		if (runtime_to_ms() == 0 && philo -> nth % 2 == 0)
+		if (runtime_to_ms() <= 10 && philo -> nth % 2 == 0)
 			usleep(philo -> time_to_eat * 1000);
 		pthread_mutex_lock(&philo -> fork);
 		put(philo -> nth, FORK);
