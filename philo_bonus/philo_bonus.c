@@ -67,7 +67,7 @@ void	philo_routine(t_philo *philo, t_sems *sems, unsigned long long start)
 	pthread_create(&th, NULL, &health_center, philo);
 	while (1)
 	{
-		if (runtime_to_ms(start) == 0 && philo -> nth % 2 == 0)
+		if (runtime_to_ms(start) <= 10 && philo -> nth % 2 == 0)
 			usleep(philo -> time_to_eat * 1000);
 		sem_wait(sems -> forks);
 		put(philo, FORK, sems -> pen);
