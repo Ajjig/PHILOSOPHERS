@@ -30,13 +30,13 @@ void	free_clear(t_philo *head)
 {
 	t_philo	*next;
 
-	next = head;
-	free(head);
-	head = head->next;
-	while (next != head && head != NULL)
+	next = head -> next;
+	while (1)
 	{
 		free(head);
-		head = head->next;
+		head = head -> next;
+		if (head == next)
+			break ;
 	}
 }
 
@@ -44,12 +44,14 @@ int	is_all_eat(t_philo *head)
 {
 	t_philo	*round;
 
-	round = head -> next;
-	while (round != head)
+	round = head;
+	while (1)
 	{
 		if (round -> number_of_times_each_philosopher_must_eat > 0)
 			return (0);
 		round = round -> next;
+		if (round == head)
+			break ;
 	}
 	return (1);
 }
