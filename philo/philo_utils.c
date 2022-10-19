@@ -6,7 +6,7 @@
 /*   By: majjig <majjig@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 23:08:33 by majjig            #+#    #+#             */
-/*   Updated: 2022/02/16 20:33:26 by majjig           ###   ########.fr       */
+/*   Updated: 2022/10/19 03:50:23 by majjig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	is_all_eat(t_philo *head)
 		round = round -> next;
 		if (round == head)
 			break ;
+		usleep(100);
 	}
 	return (1);
 }
@@ -72,6 +73,7 @@ void	*health_center(void *void_arg)
 			return (NULL);
 		}
 		philo = philo -> next;
+		usleep(100);
 	}
 }
 
